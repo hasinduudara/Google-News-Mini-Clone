@@ -12,10 +12,9 @@ public class NewsService {
     private final String apiKey;
 
     // Constructor injection
-    public NewsService(RestClient.Builder builder,
-                       @Value("${news.api.url}") String baseUrl,
+    public NewsService(@Value("${news.api.url}") String baseUrl,
                        @Value("${news.api.key}") String apiKey) {
-        this.restClient = builder.baseUrl(baseUrl).build();
+        this.restClient = RestClient.builder().baseUrl(baseUrl).build();
         this.apiKey = apiKey;
     }
 
