@@ -18,8 +18,9 @@ public class NewsController {
     @GetMapping
     public NewsResponse getNews(
             @RequestParam(defaultValue = "all") String category,
-            @RequestParam(required = false) String search) {
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "1") int page) {
 
-        return newsService.getNews(category, search);
+        return newsService.getNews(category, search, page);
     }
 }

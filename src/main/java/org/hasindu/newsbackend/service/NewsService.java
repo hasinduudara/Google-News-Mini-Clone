@@ -39,7 +39,7 @@ public class NewsService {
                             .path("/top")
                             .queryParam("api_token", apiKey)
                             .queryParam("locale", "us")
-                            .queryParam("limit", "5");
+                            .queryParam("limit", "6");
 
                     // Only add category if it's not "all" or null
                     if (category != null && !category.equals("all")) {
@@ -60,7 +60,7 @@ public class NewsService {
                             .path("/top")
                             .queryParam("api_token", apiKey)
                             .queryParam("locale", "us")
-                            .queryParam("limit", "5");
+                            .queryParam("limit", "6");
 
                     // Add Category filter
                     if (category != null && !category.equals("all")) {
@@ -68,6 +68,29 @@ public class NewsService {
                     }
 
                     // Add Search filter (NEW)
+                    if (search != null && !search.isEmpty()) {
+                        uriBuilder.queryParam("search", search);
+                    }
+
+                    return uriBuilder.build();
+                })
+                .retrieve()
+                .body(NewsResponse.class);
+    }
+
+    public NewsResponse getNews(String category, String search, int page) {
+        return restClient.get()
+                .uri(uriBuilder -> {
+                    uriBuilder
+                            .path("/top")
+                            .queryParam("api_token", apiKey)
+                            .queryParam("locale", "us")
+                            .queryParam("limit", "6")
+                            .queryParam("page", page);
+
+                    if (category != null && !category.equals("all")) {
+                        uriBuilder.queryParam("categories", category);
+                    }
                     if (search != null && !search.isEmpty()) {
                         uriBuilder.queryParam("search", search);
                     }
